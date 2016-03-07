@@ -50,10 +50,10 @@ function add()
 		text = text.replace(/(^\s*)|(\s*$)/gi,"");
 		if (val == "PRODUCT")
 		{
-			val = prompt('{l s="Indicate the ID number for the product" mod='blocktopmenu' js=1}');
+			val = prompt('{l s="Indicate the ID number for the product" mod='ps_mainmenu' js=1}');
 			if (val == null || val == "" || isNaN(val))
 				return;
-			text = '{l s="Product ID #" mod='blocktopmenu' js=1}'+val;
+			text = '{l s="Product ID #" mod='ps_mainmenu' js=1}'+val;
 			val = "PRD"+val;
 		}
 		$("#items").append('<option value="'+val+'" selected="selected">'+text+'</option>');
@@ -82,7 +82,7 @@ function move(up)
         var tomove = $('#items option:selected');
         if (tomove.length >1)
         {
-                alert('{l s="Please select just one item" mod='blocktopmenu'}');
+                alert('{l s="Please select just one item" mod='ps_mainmenu'}');
                 return false;
         }
         if (up)
@@ -99,25 +99,25 @@ function move(up)
     {if $input.type == 'link_choice'}
 	    <div class="row">
 	    	<div class="col-lg-1">
-	    		<h4 style="margin-top:5px;">{l s='Change position' mod='blocktopmenu'}</h4> 
+	    		<h4 style="margin-top:5px;">{l s='Change position' mod='ps_mainmenu'}</h4> 
                 <a href="#" id="menuOrderUp" class="btn btn-default" style="font-size:20px;display:block;"><i class="icon-chevron-up"></i></a><br/>
                 <a href="#" id="menuOrderDown" class="btn btn-default" style="font-size:20px;display:block;"><i class="icon-chevron-down"></i></a><br/>
 	    	</div>
 	    	<div class="col-lg-4">
-	    		<h4 style="margin-top:5px;">{l s='Selected items' mod='blocktopmenu'}</h4>
+	    		<h4 style="margin-top:5px;">{l s='Selected items' mod='ps_mainmenu'}</h4>
 	    		{$selected_links}
 	    	</div>
 	    	<div class="col-lg-4">
-	    		<h4 style="margin-top:5px;">{l s='Available items' mod='blocktopmenu'}</h4>
+	    		<h4 style="margin-top:5px;">{l s='Available items' mod='ps_mainmenu'}</h4>
 	    		{$choices}
 	    	</div>
-	    	
+
 	    </div>
 	    <br/>
 	    <div class="row">
 	    	<div class="col-lg-1"></div>
-	    	<div class="col-lg-4"><a href="#" id="removeItem" class="btn btn-default"><i class="icon-arrow-right"></i> {l s='Remove' mod='blocktopmenu'}</a></div>
-	    	<div class="col-lg-4"><a href="#" id="addItem" class="btn btn-default"><i class="icon-arrow-left"></i> {l s='Add' mod='blocktopmenu'}</a></div>
+	    	<div class="col-lg-4"><a href="#" id="removeItem" class="btn btn-default"><i class="icon-arrow-right"></i> {l s='Remove' mod='ps_mainmenu'}</a></div>
+	    	<div class="col-lg-4"><a href="#" id="addItem" class="btn btn-default"><i class="icon-arrow-left"></i> {l s='Add' mod='ps_mainmenu'}</a></div>
 	    </div>
 	{else}
 		{$smarty.block.parent}

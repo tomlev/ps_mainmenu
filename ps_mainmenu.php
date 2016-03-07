@@ -28,7 +28,7 @@ use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
 require(dirname(__FILE__).'/menutoplinks.class.php');
 
-class Blocktopmenu extends Module implements WidgetInterface
+class Ps_MainMenu extends Module implements WidgetInterface
 {
     const MENU_JSON_CACHE_KEY = 'MOD_BLOCKTOPMENU_MENU_JSON';
 
@@ -54,16 +54,16 @@ class Blocktopmenu extends Module implements WidgetInterface
 
     public function __construct()
     {
-        $this->name = 'blocktopmenu';
+        $this->name = 'ps_mainmenu';
         $this->tab = 'front_office_features';
-        $this->version = '4.0.0';
+        $this->version = '1.0.0';
         $this->author = 'PrestaShop';
 
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->l('Top horizontal menu');
-        $this->description = $this->l('Adds a new horizontal menu to the top of your e-commerce website.');
+        $this->displayName = $this->l('Main menu');
+        $this->description = $this->l('Adds a new menu to the top of your e-commerce website.');
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
 
@@ -788,15 +788,6 @@ class Blocktopmenu extends Module implements WidgetInterface
         return parent::getCacheId().'|'.$page_name.($page_name != 'index' ? '|'.(int)Tools::getValue('id_'.$page_name) : '');
     }
 
-    public function hookHeader()
-    {
-        $this->context->controller->addJS($this->_path.'js/hoverIntent.js');
-        $this->context->controller->addJS($this->_path.'js/superfish-modified.js');
-        $this->context->controller->addJS($this->_path.'js/blocktopmenu.js');
-        $this->context->controller->addCSS($this->_path.'css/blocktopmenu.css');
-        $this->context->controller->addCSS($this->_path.'css/superfish-modified.css');
-    }
-
     protected function getCMSCategories($recursive = false, $parent = 1, $id_lang = false, $id_shop = false)
     {
         $id_lang = $id_lang ? (int)$id_lang : (int)Context::getContext()->language->id;
@@ -952,7 +943,7 @@ class Blocktopmenu extends Module implements WidgetInterface
 
     protected function getCacheDirectory()
     {
-        return _PS_CACHE_DIR_ . DIRECTORY_SEPARATOR . 'blocktopmenu';
+        return _PS_CACHE_DIR_ . DIRECTORY_SEPARATOR . 'ps_mainmenu';
     }
 
     protected function clearMenuCache()
@@ -1430,6 +1421,6 @@ class Blocktopmenu extends Module implements WidgetInterface
         $this->smarty->assign([
             'menu' => $this->getWidgetVariables($hookName, $configuration)
         ]);
-        return $this->display(__FILE__, 'blocktopmenu.tpl');
+        return $this->display(__FILE__, 'ps_mainmenu.tpl');
     }
 }
