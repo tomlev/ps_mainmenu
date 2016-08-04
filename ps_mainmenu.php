@@ -716,7 +716,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
             if ($category['level_depth'] > 1) {
                 $cat = new Category($category['id_category']);
-                $link = Tools::HtmlEntitiesUTF8($cat->getLink());
+                $link = $cat->getLink();
             } else {
                 $link = $this->context->link->getPageLink('index');
             }
