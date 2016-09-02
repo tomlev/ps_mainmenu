@@ -86,7 +86,8 @@ class Ps_MainMenu extends Module implements WidgetInterface
             !$this->registerHook('actionObjectProductDeleteAfter') ||
             !$this->registerHook('actionObjectProductAddAfter') ||
             !$this->registerHook('categoryUpdate') ||
-            !$this->registerHook('actionShopDataDuplication')) {
+            !$this->registerHook('actionShopDataDuplication') ||
+            !$this->registerHook('displayTop')) {
             return false;
         }
 
