@@ -64,7 +64,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
         $this->displayName = $this->l('Main menu');
         $this->description = $this->l('Adds a new menu to the top of your e-commerce website.');
-        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
     }
 
     public function install($delete_params = true)
