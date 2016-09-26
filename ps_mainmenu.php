@@ -1422,6 +1422,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $this->smarty->assign([
             'menu' => $this->getWidgetVariables($hookName, $configuration)
         ]);
-        return $this->display(__FILE__, 'ps_mainmenu.tpl');
+
+        return $this->fetch('module:ps_mainmenu/ps_mainmenu.tpl');
     }
 }
