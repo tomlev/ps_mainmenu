@@ -26,7 +26,7 @@
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
-require(dirname(__FILE__).'/menutoplinks.class.php');
+require(dirname(__FILE__).'/ps_menutoplinks.class.php');
 
 class Ps_MainMenu extends Module implements WidgetInterface
 {
@@ -225,7 +225,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                         $shops = Shop::getContextListShopID();
 
                         foreach ($shops as $shop_id) {
-                            $added = MenuTopLinks::add($links_label, $labels,  Tools::getValue('new_window', 0), (int)$shop_id);
+                            $added = Ps_MenuTopLinks::add($links_label, $labels,  Tools::getValue('new_window', 0), (int)$shop_id);
 
                             if (!$added) {
                                 $shop = new Shop($shop_id);
@@ -247,7 +247,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                 $shops = Shop::getContextListShopID();
 
                 foreach ($shops as $shop_id) {
-                    $deleted = MenuTopLinks::remove($id_linksmenutop, (int)$shop_id);
+                    $deleted = Ps_MenuTopLinks::remove($id_linksmenutop, (int)$shop_id);
                     Configuration::updateValue('MOD_BLOCKTOPMENU_ITEMS', str_replace(array('LNK'.$id_linksmenutop.',', 'LNK'.$id_linksmenutop), '', Configuration::get('MOD_BLOCKTOPMENU_ITEMS')));
 
                     if (!$deleted) {
@@ -277,7 +277,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                         $label[$lang['id_lang']] = Tools::getValue('label_'.(int)$lang['id_lang']);
                     }
 
-                    MenuTopLinks::update($link, $label, $new_window, (int)$id_shop, (int)$id_linksmenutop, (int)$id_linksmenutop);
+                    Ps_MenuTopLinks::update($link, $label, $new_window, (int)$id_shop, (int)$id_linksmenutop, (int)$id_linksmenutop);
                     $this->_html .= $this->displayConfirmation($this->l('The link has been edited.'));
                 }
                 $update_cache = true;
@@ -303,7 +303,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $this->_html .= $this->renderForm().$this->renderAddForm();
 
         foreach ($shops as $shop_id) {
-            $links = array_merge($links, MenuTopLinks::gets((int)$id_lang, null, (int)$shop_id));
+            $links = array_merge($links, Ps_MenuTopLinks::gets((int)$id_lang, null, (int)$shop_id));
         }
 
         if (!count($links)) {
@@ -438,11 +438,11 @@ class Ps_MainMenu extends Module implements WidgetInterface
                     break;
 
                 case 'LNK':
-                    $link = MenuTopLinks::get((int)$id, (int)$id_lang, (int)$id_shop);
+                    $link = Ps_MenuTopLinks::get((int)$id, (int)$id_lang, (int)$id_shop);
                     if (count($link)) {
                         if (!isset($link[0]['label']) || ($link[0]['label'] == '')) {
                             $default_language = Configuration::get('PS_LANG_DEFAULT');
-                            $link = MenuTopLinks::get($link[0]['id_linksmenutop'], (int)$default_language, (int)Shop::getContextShopID());
+                            $link = Ps_MenuTopLinks::get($link[0]['id_linksmenutop'], (int)$default_language, (int)Shop::getContextShopID());
                         }
                         $html .= '<option selected="selected" value="LNK'.(int)$link[0]['id_linksmenutop'].'">'.Tools::safeOutput($link[0]['label']).'</option>';
                     }
@@ -658,11 +658,11 @@ class Ps_MainMenu extends Module implements WidgetInterface
                     }
                     break;
                 case 'LNK':
-                    $link = MenuTopLinks::get($id, $id_lang, $id_shop);
+                    $link = Ps_MenuTopLinks::get($id, $id_lang, $id_shop);
                     if (!empty($link)) {
                         if (!isset($link[0]['label']) || ($link[0]['label'] == '')) {
                             $default_language = Configuration::get('PS_LANG_DEFAULT');
-                            $link = MenuTopLinks::get($link[0]['id_linksmenutop'], $default_language, (int)Shop::getContextShopID());
+                            $link = Ps_MenuTopLinks::get($link[0]['id_linksmenutop'], $default_language, (int)Shop::getContextShopID());
                         }
                         $root_node['children'][] = $this->makeNode([
                             'type' => 'link',
@@ -1203,11 +1203,11 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
         // BEGIN Menu Top Links
         $html .= '<optgroup label="'.$this->l('Menu Top Links').'">';
-        $links = MenuTopLinks::gets($this->context->language->id, null, (int)Shop::getContextShopID());
+        $links = Ps_MenuTopLinks::gets($this->context->language->id, null, (int)Shop::getContextShopID());
         foreach ($links as $link) {
             if ($link['label'] == '') {
                 $default_language = Configuration::get('PS_LANG_DEFAULT');
-                $link = MenuTopLinks::get($link['id_linksmenutop'], $default_language, (int)Shop::getContextShopID());
+                $link = Ps_MenuTopLinks::get($link['id_linksmenutop'], $default_language, (int)Shop::getContextShopID());
                 if (!in_array('LNK'.(int)$link[0]['id_linksmenutop'], $items)) {
                     $html .= '<option value="LNK'.(int)$link[0]['id_linksmenutop'].'">'.$spacer.Tools::safeOutput($link[0]['label']).'</option>';
                 }
@@ -1280,7 +1280,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $new_window_edit = '';
 
         if (Tools::isSubmit('updatelinksmenutop')) {
-            $link = MenuTopLinks::getLinkLang(Tools::getValue('id_linksmenutop'), (int)Shop::getContextShopID());
+            $link = Ps_MenuTopLinks::getLinkLang(Tools::getValue('id_linksmenutop'), (int)Shop::getContextShopID());
 
             foreach ($link['link'] as $key => $label) {
                 $link['link'][$key] = Tools::htmlentitiesDecodeUTF8($label);
@@ -1319,7 +1319,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $links = array();
 
         foreach ($shops as $shop_id) {
-            $links = array_merge($links, MenuTopLinks::gets((int)$this->context->language->id, null, (int)$shop_id));
+            $links = array_merge($links, Ps_MenuTopLinks::gets((int)$this->context->language->id, null, (int)$shop_id));
         }
 
         $fields_list = array(

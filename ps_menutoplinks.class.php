@@ -24,7 +24,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-class MenuTopLinks
+class Ps_MenuTopLinks
 {
     public static function gets($id_lang, $id_linksmenutop = null, $id_shop)
     {
