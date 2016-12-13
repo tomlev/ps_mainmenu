@@ -666,7 +666,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                         }
                         $root_node['children'][] = $this->makeNode([
                             'type' => 'link',
-                            'page_identifier' => $link[0]['link'],
+                            'page_identifier' => 'lnk-' . Tools::str2url($link[0]['label']),
                             'label' => $link[0]['label'],
                             'url' => $link[0]['link'],
                             'open_in_new_window' => $link[0]['new_window']
