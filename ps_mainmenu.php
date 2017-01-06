@@ -158,8 +158,6 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
     public function getContent()
     {
-        $this->context->controller->addjQueryPlugin('hoverIntent');
-
         $id_lang = (int)Context::getContext()->language->id;
         $languages = $this->context->controller->getLanguages();
         $default_language = (int)Configuration::get('PS_LANG_DEFAULT');
