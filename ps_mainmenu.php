@@ -1326,7 +1326,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                 'type' => 'text',
             ),
             'name' => array(
-                'title' => $this->trans('Shop name', array(), 'Admin.ShopParameters.Feature'),
+                'title' => $this->trans('Shop name', array(), 'Admin.Shopparameters.Feature'),
                 'type' => 'text',
             ),
             'label' => array(
