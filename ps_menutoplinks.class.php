@@ -70,7 +70,7 @@ class Ps_MenuTopLinks
     public static function updateUrl($link)
     {
         for($i = 1; $i <= count($link); $i++) {
-            if (substr($link[$i], 0, 4) === "www.") {
+            if (substr($link[$i], 0, 7) !== "http://" && substr($link[$i], 0, 8) !== "https://") {
                 $link[$i] = "http://" . $link[$i];
             }
         }
