@@ -1072,6 +1072,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Link', array(), 'Admin.Global'),
+                        'placeholder' => 'http://www.example.com',
                         'name' => 'link',
                         'lang' => true,
                     ),
