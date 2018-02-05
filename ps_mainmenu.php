@@ -92,7 +92,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         }
 
         if ($delete_params) {
-            if (!$this->installDb() || !Configuration::updateGlobalValue('MOD_BLOCKTOPMENU_ITEMS', 'CAT3,CAT26')) {
+            if (!$this->installDb() || !Configuration::updateGlobalValue('MOD_BLOCKTOPMENU_ITEMS', 'CAT3,CAT6,CAT9')) {
                 return false;
             }
         }
