@@ -942,7 +942,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
 
     protected function getCacheDirectory()
     {
-        return _PS_CACHE_DIR_ . DIRECTORY_SEPARATOR . 'ps_mainmenu';
+        return _PS_CACHE_DIR_ . 'ps_mainmenu';
     }
 
     protected function clearMenuCache()
