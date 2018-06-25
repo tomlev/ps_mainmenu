@@ -711,6 +711,10 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $nodes = [];
 
         foreach ($categories as $key => $category) {
+            $categoryModel = new Category($category['id_category']);
+            if (!$categoryModel->checkAccess($this->context->customer->id)) {
+                continue;
+            }
             $node = $this->makeNode([]);
 
             if ($category['level_depth'] > 1) {
@@ -1400,6 +1404,7 @@ class Ps_MainMenu extends Module implements WidgetInterface
         $cacheDir = $this->getCacheDirectory();
         $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . $key;
         $menu = json_decode(@file_get_contents($cacheFile), true);
+        //$menu = null;//NO_PROD
         if (!is_array($menu) || json_last_error() !== JSON_ERROR_NONE) {
             $menu = $this->makeMenu();
             if (!is_dir($cacheDir)) {
